@@ -29,7 +29,8 @@ html {
 *::after {
   box-sizing: inherit;
 }
-.visually-hidden {
+.visually-hidden,
+.checkbox {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -381,8 +382,11 @@ p {
   padding: auto 28px;
   background-color: #2196f3;
   border-radius: 4px;
+  border-color: transparent;
   color: var(--white-text-color);
-
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.88;
   transition: color var(--duration) var(--timing-function),
     background-color var(--duration) var(--timing-function),
     box-shadow var(--duration) var(--timing-function);
@@ -390,6 +394,7 @@ p {
 .button-footer:focus,
 .button-footer:hover {
   background-color: var(--main-button-hover-color);
+  box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.1);
 }
 .send-footer-ico {
   margin-left: 10px;
@@ -489,18 +494,13 @@ p {
   line-height: 1.73;
   font-size: 14px;
 }
-/* .ico-differens {
-  width: 70px;
-  height: 70px;
-} */
+
 .list-difference {
   display: flex;
   text-align: start;
   justify-content: space-between;
 }
-/* .list-difference .item {
-  width: 270px;
-} */
+
 .differens-icon-box {
   width: 270px;
   height: 120px;
@@ -761,6 +761,11 @@ p {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   cursor: pointer;
+  transition: fill var(--duration) var(--timing-function);
+}
+.btn-modal-close:hover,
+.btn-modal-close:focus {
+  fill: var(--accent-color);
 }
 .modal-form {
   width: 528px;
@@ -770,10 +775,36 @@ p {
   margin-right: auto;
   padding: 40px;
 }
+.modal-list label {
+  color: #757575;
+  margin-bottom: 4px;
+}
 .modal-form .client-info-field {
   height: 40px;
   border-radius: 4px;
+}
+
+.client-info-field {
   border-color: rgba(33, 33, 33, 0.2);
+  position: relative;
+  padding-left: 30px;
+  transition: border-color var(--duration) var(--timing-function),
+    outline var(--duration) var(--timing-function);
+}
+.modal-contact-icon {
+  position: absolute;
+  transform: translateY(30px);
+  left: 50px;
+  transition: fill var(--duration) var(--timing-function);
+}
+.client-info-field:focus ~ .modal-contact-icon {
+  fill: var(--accent-color);
+}
+.client-info-field:focus,
+.comment:focus,
+.input-mail-footer:focus {
+  border-color: var(--accent-color);
+  outline: none;
 }
 
 .modal-list {
@@ -796,25 +827,49 @@ p {
   margin-bottom: 12px;
 }
 .comment {
+  color: rgba(117, 117, 117, 0.5);
   border-radius: 4px;
   border-color: rgba(33, 33, 33, 0.2);
   padding: 12px 16px;
   resize: none;
   height: 120px;
   width: 448px;
+  transition: border-color var(--duration) var(--timing-function),
+    outline var(--duration) var(--timing-function);
 }
 .check-box-modal-text {
-  font-size: 14px;
-  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+.icon-check {
+  margin-right: 10px;
+  align-items: center;
+  display: block;
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+  border: 2px solid var(--title-text-color);
+}
+.icon-check:hover {
+}
+.checkbox:checked + .icon-check {
+  display: block;
+  border-color: var(--accent-color);
+  background-color: #2196f3;
+  background-image: url(../images/check.svg);
+  background-size: contain;
+  background-origin: border-box;
 }
 .check-box-modal {
+  font-size: 14px;
+  margin-top: 20px;
   margin-left: 9px;
   display: flex;
-  flex-direction: row;
-  align-items: baseline;
+
   justify-content: center;
 }
 .check-box-modal a {
+  margin-left: 1em;
   color: var(--accent-color);
 }
 .check-box-modal-button {
@@ -828,7 +883,21 @@ p {
   border-radius: 4px;
   color: var(--white-text-color);
   background-color: var(--accent-color);
+  box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.1);
+  transition: background-color var(--duration) var(--timing-function),
+    outline var(--duration) var(--timing-function);
 }
+.check-box-modal-button:hover,
+.check-box-modal-button:focus {
+  background-color: #188ce8;
+  outline: none;
+}
+/* .checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: absolute;
+} */
 /* ++++++++++++++++++++++хедер подчеркивания активной страницы++++++++++++++++++++++++++ */
 .active {
   position: relative;
@@ -876,10 +945,14 @@ p {
 }
 
 .input-mail-footer {
+  font-size: 16px;
+  color: var(--primary-text-color);
   padding: 15px auto 15px;
   height: 50px;
   width: 385px;
   background-color: var(--secondary-bg-color);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 4px;
+  transition: border-color var(--duration) var(--timing-function),
+    outline var(--duration) var(--timing-function);
 }
